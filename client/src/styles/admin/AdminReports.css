@@ -1,0 +1,357 @@
+.admin-reports {
+  min-height: 100vh;
+  background-color: var(--light-color);
+  padding: 20px;
+}
+
+.admin-reports-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.admin-reports-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.admin-reports-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-reports-search {
+  flex: 1;
+  position: relative;
+}
+
+.admin-reports-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 45px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.admin-reports-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.admin-reports-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-color);
+}
+
+.admin-reports-filter-select {
+  padding: 12px 16px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.admin-reports-filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.admin-reports-table-container {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+}
+
+.admin-reports-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-reports-table th {
+  background-color: var(--light-color);
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-reports-table td {
+  padding: 15px;
+  border-top: 1px solid var(--light-gray);
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.admin-reports-table tr:hover {
+  background-color: var(--light-color);
+}
+
+.admin-report-post {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-report-post-image {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-report-post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-report-post-title {
+  font-weight: 600;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-report-post-author {
+  font-size: 12px;
+  color: var(--gray-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-report-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-report-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-report-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-report-user-name {
+  font-weight: 600;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-report-user-email {
+  font-size: 12px;
+  color: var(--gray-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-report-reason {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-report-reason.spam {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.admin-report-reason.hate-speech {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.admin-report-reason.harassment {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.admin-report-reason.inappropriate {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.admin-report-reason.copyright {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.admin-report-reason.other {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.admin-report-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-report-status.pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.admin-report-status.resolved {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.admin-report-status.rejected {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.admin-report-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-report-btn {
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-report-btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.admin-report-btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.admin-report-btn-secondary {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.admin-report-btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.admin-report-btn-danger {
+  background-color: var(--light-color);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+.admin-report-btn-danger:hover {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+.admin-reports-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.admin-reports-pagination-btn {
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid #ced4da;
+  background-color: var(--white-color);
+}
+
+.admin-reports-pagination-btn:hover {
+  background-color: var(--light-color);
+}
+
+.admin-reports-pagination-btn.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+.admin-reports-pagination-info {
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+@media (max-width: 768px) {
+  .admin-reports-filters {
+    flex-direction: column;
+  }
+  
+  .admin-reports-table-container {
+    overflow-x: auto;
+  }
+  
+  .admin-reports-table {
+    min-width: 700px;
+  }
+  
+  .admin-report-post-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .admin-report-user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .admin-report-actions {
+    flex-direction: column;
+  }
+  
+  .admin-report-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

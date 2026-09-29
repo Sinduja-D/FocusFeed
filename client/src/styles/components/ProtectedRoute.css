@@ -1,0 +1,102 @@
+.protected-route {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-color);
+}
+
+.protected-route-container {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+.protected-route-icon {
+  font-size: 64px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.protected-route-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.protected-route-message {
+  font-size: 16px;
+  color: var(--gray-color);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.protected-route-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.protected-route-btn {
+  padding: 12px 30px;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.protected-route-btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.protected-route-btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.protected-route-btn-secondary {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.protected-route-btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+@media (max-width: 768px) {
+  .protected-route-container {
+    padding: 30px 20px;
+  }
+  
+  .protected-route-icon {
+    font-size: 48px;
+  }
+  
+  .protected-route-title {
+    font-size: 20px;
+  }
+  
+  .protected-route-message {
+    font-size: 14px;
+  }
+  
+  .protected-route-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

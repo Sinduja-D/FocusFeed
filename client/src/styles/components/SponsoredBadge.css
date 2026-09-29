@@ -1,0 +1,111 @@
+.sponsored-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.sponsored-badge-icon {
+  font-size: 14px;
+}
+
+.sponsored-badge-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.sponsored-badge-tooltip:hover .sponsored-badge-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sponsored-badge-tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #2c3e50;
+  color: var(--white-color);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  margin-bottom: 5px;
+  z-index: 1000;
+}
+
+.sponsored-badge-tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #2c3e50;
+}
+
+.sponsored-ad-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(0, 123, 255, 0.05);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+.sponsored-ad-info-icon {
+  color: var(--primary-color);
+}
+
+.sponsored-ad-info-text {
+  flex: 1;
+}
+
+.sponsored-ad-info-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.sponsored-ad-info-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 5px;
+}
+
+.sponsored-ad-info-btn:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .sponsored-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+  
+  .sponsored-badge-icon {
+    font-size: 12px;
+  }
+  
+  .sponsored-ad-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

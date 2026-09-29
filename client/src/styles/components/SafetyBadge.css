@@ -1,0 +1,138 @@
+.safety-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.safety-badge.safe {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.safety-badge.review {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.safety-badge.restricted {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.safety-badge-icon {
+  font-size: 14px;
+}
+
+.safety-badge-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.safety-badge-tooltip:hover .safety-badge-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.safety-badge-tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #2c3e50;
+  color: var(--white-color);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  margin-bottom: 5px;
+  z-index: 1000;
+}
+
+.safety-badge-tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #2c3e50;
+}
+
+.safety-info {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+.safety-info-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.safety-info-icon {
+  color: var(--primary-color);
+}
+
+.safety-info-text {
+  line-height: 1.6;
+}
+
+.safety-info-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.safety-info-btn {
+  background: none;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.safety-info-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+@media (max-width: 768px) {
+  .safety-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+  
+  .safety-badge-icon {
+    font-size: 12px;
+  }
+  
+  .safety-info {
+    padding: 12px;
+  }
+  
+  .safety-info-actions {
+    flex-direction: column;
+  }
+  
+  .safety-info-btn {
+    width: 100%;
+  }
+}

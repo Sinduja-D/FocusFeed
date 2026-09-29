@@ -1,0 +1,11 @@
+.main-layout { min-height: 100vh; display: flex; flex-direction: column; background: linear-gradient(180deg, #eef6ff 0%, #f8fafc 25%, #edf2ff 100%); }
+
+.main-container { display: flex; flex: 1; width: 100%; max-width: 1440px; margin: 0 auto; padding: 24px; gap: 24px; }
+.main-content { flex: 1; min-width: 0; max-width: 1040px; margin: 0 auto; padding: 8px 0 24px; }
+.main-content > * { width: 100%; }
+
+@media (max-width: 768px) {
+  .main-layout { padding-bottom: 72px; }
+  .main-container { display: block; padding: 12px 12px 18px; }
+  .main-content { width: 100%; padding: 0; }
+}

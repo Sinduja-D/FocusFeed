@@ -1,0 +1,142 @@
+.interest-setup-page {
+  min-height: 100vh;
+  background-color: var(--light-color);
+  padding: 20px;
+}
+
+.interest-setup-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 40px;
+}
+
+.interest-setup-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.interest-setup-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.interest-setup-subtitle {
+  font-size: 18px;
+  color: var(--gray-color);
+  line-height: 1.6;
+}
+
+.interest-setup-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.interest-setup-progress-bar {
+  width: 300px;
+  height: 8px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.interest-setup-progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.interest-setup-progress-text {
+  margin-left: 15px;
+  font-size: 14px;
+  color: var(--gray-color);
+  font-weight: 500;
+}
+
+.interest-setup-content {
+  margin-bottom: 40px;
+}
+
+.interest-setup-step {
+  display: none;
+}
+
+.interest-setup-step.active {
+  display: block;
+}
+
+.interest-setup-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.interest-setup-nav-btn {
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.interest-setup-nav-btn-prev {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+.interest-setup-nav-btn-prev:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.interest-setup-nav-btn-next {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.interest-setup-nav-btn-next:hover {
+  background-color: #0056b3;
+}
+
+.interest-setup-nav-btn:disabled {
+  background-color: var(--gray-color);
+  color: var(--white-color);
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .interest-setup-container {
+    padding: 30px 20px;
+  }
+  
+  .interest-setup-title {
+    font-size: 24px;
+  }
+  
+  .interest-setup-subtitle {
+    font-size: 16px;
+  }
+  
+  .interest-setup-progress-bar {
+    width: 200px;
+  }
+  
+  .interest-setup-nav-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .interest-setup-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,454 @@
+.collaborations-page {
+  min-height: 100vh;
+  background-color: var(--light-color);
+  padding: 20px;
+}
+
+.collaborations-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
+}
+
+.collaborations-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+.collaborations-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.collaborations-header {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 30px;
+}
+
+.collaborations-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.collaborations-subtitle {
+  font-size: 16px;
+  color: var(--gray-color);
+  line-height: 1.6;
+}
+
+.collaborations-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.collaborations-search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.collaborations-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.collaborations-search-btn {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.collaborations-search-btn:hover {
+  background-color: #0056b3;
+}
+
+.collaborations-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.collaborations-filter {
+  padding: 8px 16px;
+  border: 1px solid var(--light-gray);
+  border-radius: 20px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+.collaborations-filter:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.collaborations-filter.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+.collaborations-create-btn {
+  background-color: var(--success-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.collaborations-create-btn:hover {
+  background-color: #1e7e34;
+}
+
+.collaborations-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--light-gray);
+  margin-bottom: 20px;
+}
+
+.collaborations-tab {
+  padding: 15px 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-color);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.collaborations-tab:hover {
+  color: var(--primary-color);
+}
+
+.collaborations-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.collaborations-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.collaborations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.collaboration-card {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 25px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.collaboration-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.collaboration-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.collaboration-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.collaboration-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.collaboration-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collaboration-creator {
+  font-size: 14px;
+  color: var(--gray-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collaboration-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.collaboration-status.open {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.collaboration-status.in-progress {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.collaboration-status.completed {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.collaboration-status.cancelled {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.collaboration-description {
+  font-size: 14px;
+  color: var(--gray-color);
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.collaboration-purpose {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.collaboration-purpose-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.collaboration-purpose-text {
+  font-size: 13px;
+  color: var(--gray-color);
+}
+
+.collaboration-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+.collaboration-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.collaboration-stat-icon {
+  font-size: 16px;
+}
+
+.collaboration-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.collaboration-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.collaboration-tag {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.collaboration-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.collaboration-btn {
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.collaboration-btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.collaboration-btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.collaboration-btn-secondary {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.collaboration-btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.collaborations-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-color);
+}
+
+.collaborations-empty-icon {
+  font-size: 64px;
+  color: var(--light-gray);
+  margin-bottom: 20px;
+}
+
+.collaborations-empty-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.collaborations-empty-text {
+  font-size: 16px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.collaborations-empty-btn {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.collaborations-empty-btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .collaborations-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .collaborations-sidebar {
+    position: static;
+  }
+  
+  .collaborations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .collaboration-card {
+    padding: 20px;
+  }
+  
+  .collaboration-header {
+    gap: 10px;
+  }
+  
+  .collaboration-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .collaboration-title {
+    font-size: 16px;
+  }
+  
+  .collaboration-stats {
+    gap: 15px;
+  }
+  
+  .collaboration-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .collaboration-actions {
+    width: 100%;
+  }
+  
+  .collaboration-btn {
+    flex: 1;
+  }
+  
+  .collaborations-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .collaborations-tab {
+    white-space: nowrap;
+  }
+}

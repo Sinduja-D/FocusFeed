@@ -1,0 +1,337 @@
+.admin-appeals {
+  min-height: 100vh;
+  background-color: var(--light-color);
+  padding: 20px;
+}
+
+.admin-appeals-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-appeals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.admin-appeals-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.admin-appeals-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-appeals-search {
+  flex: 1;
+  position: relative;
+}
+
+.admin-appeals-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 45px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.admin-appeals-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.admin-appeals-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-color);
+}
+
+.admin-appeals-filter-select {
+  padding: 12px 16px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.admin-appeals-filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.admin-appeals-table-container {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+}
+
+.admin-appeals-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-appeals-table th {
+  background-color: var(--light-color);
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-appeals-table td {
+  padding: 15px;
+  border-top: 1px solid var(--light-gray);
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.admin-appeals-table tr:hover {
+  background-color: var(--light-color);
+}
+
+.admin-appeal-post {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-appeal-post-image {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-appeal-post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-appeal-post-title {
+  font-weight: 600;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-appeal-post-author {
+  font-size: 12px;
+  color: var(--gray-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-appeal-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-appeal-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-appeal-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-appeal-user-name {
+  font-weight: 600;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-appeal-user-email {
+  font-size: 12px;
+  color: var(--gray-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-appeal-decision {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-appeal-decision.reinstate {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.admin-appeal-decision.maintain {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.admin-appeal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-appeal-status.pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.admin-appeal-status.resolved {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.admin-appeal-status.rejected {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.admin-appeal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-appeal-btn {
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-appeal-btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.admin-appeal-btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.admin-appeal-btn-secondary {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.admin-appeal-btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.admin-appeal-btn-danger {
+  background-color: var(--light-color);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+.admin-appeal-btn-danger:hover {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+.admin-appeals-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.admin-appeals-pagination-btn {
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid #ced4da;
+  background-color: var(--white-color);
+}
+
+.admin-appeals-pagination-btn:hover {
+  background-color: var(--light-color);
+}
+
+.admin-appeals-pagination-btn.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+.admin-appeals-pagination-info {
+  font-size: 14px;
+  color: var(--gray-color);
+}
+
+@media (max-width: 768px) {
+  .admin-appeals-filters {
+    flex-direction: column;
+  }
+  
+  .admin-appeals-table-container {
+    overflow-x: auto;
+  }
+  
+  .admin-appeals-table {
+    min-width: 700px;
+  }
+  
+  .admin-appeal-post-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .admin-appeal-user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .admin-appeal-actions {
+    flex-direction: column;
+  }
+  
+  .admin-appeal-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

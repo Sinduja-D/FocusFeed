@@ -1,0 +1,257 @@
+.appeal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.appeal-modal.show {
+  display: flex;
+}
+
+.appeal-modal-content {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.appeal-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.appeal-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.appeal-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray-color);
+  padding: 5px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.appeal-modal-close:hover {
+  color: var(--danger-color);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.appeal-modal-body {
+  padding: 20px;
+}
+
+.appeal-decision-section {
+  margin-bottom: 25px;
+}
+
+.appeal-decision-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.appeal-decision-subtitle {
+  font-size: 14px;
+  color: var(--gray-color);
+  margin-bottom: 15px;
+}
+
+.appeal-decisions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.appeal-decision-card {
+  background: var(--light-color);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  padding: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.appeal-decision-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appeal-decision-card.selected {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+.appeal-decision-card-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+}
+
+.appeal-decision-card.selected .appeal-decision-card-icon {
+  color: var(--white-color);
+}
+
+.appeal-decision-card-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.appeal-decision-card.selected .appeal-decision-card-text {
+  color: var(--white-color);
+}
+
+.appeal-reason-section {
+  margin-bottom: 25px;
+}
+
+.appeal-reason-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.appeal-reason-subtitle {
+  font-size: 14px;
+  color: var(--gray-color);
+  margin-bottom: 15px;
+}
+
+.appeal-reason-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.appeal-reason-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.appeal-description-section {
+  margin-bottom: 25px;
+}
+
+.appeal-description-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.appeal-description-subtitle {
+  font-size: 14px;
+  color: var(--gray-color);
+  margin-bottom: 15px;
+}
+
+.appeal-description-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.appeal-description-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.appeal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.appeal-btn {
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.appeal-btn-cancel {
+  background-color: var(--light-color);
+  color: var(--gray-color);
+}
+
+.appeal-btn-cancel:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.appeal-btn-submit {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.appeal-btn-submit:hover {
+  background-color: #0056b3;
+}
+
+.appeal-btn-submit:disabled {
+  background-color: var(--gray-color);
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .appeal-modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .appeal-decisions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .appeal-actions {
+    flex-direction: column;
+  }
+  
+  .appeal-btn {
+    width: 100%;
+  }
+}

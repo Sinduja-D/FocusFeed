@@ -1,0 +1,161 @@
+.contribution-card {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
+.contribution-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contribution-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.contribution-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.contribution-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.contribution-author {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 2px;
+}
+
+.contribution-time {
+  font-size: 12px;
+  color: var(--gray-color);
+}
+
+.contribution-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.contribution-status.pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.contribution-status.approved {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.contribution-status.rejected {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.contribution-content {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+.contribution-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.contribution-btn {
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.contribution-btn-approve {
+  background-color: var(--success-color);
+  color: var(--white-color);
+}
+
+.contribution-btn-approve:hover {
+  background-color: #1e7e34;
+}
+
+.contribution-btn-reject {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+.contribution-btn-reject:hover {
+  background-color: #c82333;
+}
+
+.contribution-btn-edit {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.contribution-btn-edit:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.contribution-btn-delete {
+  background-color: var(--light-color);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+.contribution-btn-delete:hover {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+@media (max-width: 768px) {
+  .contribution-card {
+    padding: 15px;
+  }
+  
+  .contribution-header {
+    gap: 10px;
+  }
+  
+  .contribution-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contribution-actions {
+    flex-direction: column;
+  }
+  
+  .contribution-btn {
+    width: 100%;
+  }
+}
