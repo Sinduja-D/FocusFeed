@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 const aiModerationService = require('../services/aiModerationService');
 const feedRecommendationService = require('../services/feedRecommendationService');
 
@@ -8,7 +9,7 @@ const feedRecommendationService = require('../services/feedRecommendationService
 // @access  Public
 exports.getPosts = async (req, res, next) => {
   try {
-    const { interest, focusMode, discoveryLevel } = req.query;
+    const { interest, focusMode, discoveryLevel, author } = req.query;
     
     // Get user preferences if logged in
     let userPreferences = null;
@@ -23,9 +24,12 @@ exports.getPosts = async (req, res, next) => {
     if (interest) {
       query.interest = interest;
     }
+    if (author) {
+      query.author = author;
+    }
     
     // Apply recommendation logic if user is logged in
-    if (userPreferences && focusMode && discoveryLevel) {
+    if (userPreferences && focusMode && discoveryLevel && !author) {
       // Get all posts first
       const posts = await Post.find(query).populate('author', 'name profileImage');
       
@@ -151,6 +155,15 @@ exports.likePost = async (req, res, next) => {
     }
     
     await post.save();
+
+    if (!alreadyLiked && post.author.toString() !== req.user.id.toString()) {
+      await Notification.create({
+        user: post.author,
+        type: 'Community Activity',
+        message: `${req.user.name} liked your post`,
+        relatedPost: post._id
+      });
+    }
     
     res.status(200).json({
       success: true,
@@ -186,6 +199,15 @@ exports.commentOnPost = async (req, res, next) => {
     
     post.comments.push(comment);
     await post.save();
+
+    if (post.author.toString() !== req.user.id.toString()) {
+      await Notification.create({
+        user: post.author,
+        type: 'Community Activity',
+        message: `${req.user.name} commented on your post`,
+        relatedPost: post._id
+      });
+    }
     
     // Populate comment author
     await post.populate('comments.user', 'name profileImage');

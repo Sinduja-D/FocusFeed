@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/components/Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { usePreferences } from '../context/PreferenceContext';
 import { 
   Home, 
-  Search, 
+  SlidersHorizontal,
   Users, 
   Plus, 
   Users2, 
   Bell, 
   User, 
   Settings, 
-  LogOut,
-  Menu,
-  X
+  LogOut
 } from 'lucide-react';
 
 const Navbar = () => {
   const { auth, logout } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -29,7 +24,7 @@ const Navbar = () => {
 
   const navItems = [
     { icon: Home, label: 'Home', href: '/home' },
-    { icon: Search, label: 'Discover', href: '/discover' },
+    { icon: SlidersHorizontal, label: 'Interests', href: '/interests/setup' },
     { icon: Users, label: 'Communities', href: '/communities' },
     { icon: Plus, label: 'Create', href: '/create' },
     { icon: Users2, label: 'Collaborations', href: '/collaborations' },
@@ -89,6 +84,11 @@ const Navbar = () => {
                 <User size={16} />
                 <span>Profile</span>
               </Link>
+
+              <Link to="/interests/setup" className="dropdown-item">
+                <SlidersHorizontal size={16} />
+                <span>Your interests</span>
+              </Link>
               
               <Link to="/settings/privacy" className="dropdown-item">
                 <Settings size={16} />
@@ -109,30 +109,8 @@ const Navbar = () => {
             </div>
           </div>
           
-          <button 
-            className="mobile-menu-btn"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </div>
-      
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className="mobile-nav-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <item.icon size={20} />
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
     </nav>
   );
 };

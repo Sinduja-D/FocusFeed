@@ -60,7 +60,11 @@ function App() {
               auth.user?.role === 'admin' ? <Navigate to="/admin" replace /> : <LoginPage admin />
             } />
             <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
-            <Route path="/interests/setup" element={<InterestSetupPage />} />
+            <Route path="/interests/setup" element={
+              <ProtectedRoute>
+                <InterestSetupPage />
+              </ProtectedRoute>
+            } />
             
             {/* Protected Routes */}
             <Route path="/home" element={

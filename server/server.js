@@ -16,7 +16,9 @@ const app = express();
 app.set('trust proxy', 1);
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
+}));
 app.use(cors());
 
 // Rate limiting
@@ -41,6 +43,7 @@ app.use('/api/collaborations', require('./routes/collaborationRoutes'));
 app.use('/api/contributions', require('./routes/contributionRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
 app.use('/api/appeals', require('./routes/appealRoutes'));
+app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 
 // Error handling middleware

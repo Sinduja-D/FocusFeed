@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/pages/CreatePostPage.css';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -8,11 +8,7 @@ import {
   Video, 
   Send,
   Eye,
-  Users,
-  Target,
-  Bot,
   Sparkles,
-  FileText,
   CheckCircle,
   X
 } from 'lucide-react';
@@ -26,12 +22,25 @@ const CreatePostPage = () => {
     image: null,
     video: null
   });
-  const [aiContent, setAiContent] = useState('');
+  const [mediaPreviews, setMediaPreviews] = useState({ image: '', video: '' });
   const [aiSuggestions, setAiSuggestions] = useState([]);
   const [showAiPanel, setShowAiPanel] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const navigate = useNavigate();
+  const imageInputRef = useRef(null);
+  const videoInputRef = useRef(null);
+
+  useEffect(() => {
+    const imageUrl = formData.image ? URL.createObjectURL(formData.image) : '';
+    const videoUrl = formData.video ? URL.createObjectURL(formData.video) : '';
+    setMediaPreviews({ image: imageUrl, video: videoUrl });
+
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+      if (videoUrl) URL.revokeObjectURL(videoUrl);
+    };
+  }, [formData.image, formData.video]);
 
   const interests = [
     'Technology', 'Science', 'Education', 'Sports', 'Art', 
@@ -43,20 +52,25 @@ const CreatePostPage = () => {
   const creationTypes = ['Human Created', 'AI Assisted', 'AI Generated'];
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData(current => ({ ...current, [e.target.name]: e.target.value }));
   };
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     if (files && files[0]) {
-      setFormData({
-        ...formData,
-        [name]: files[0]
-      });
+      if (files[0].size > 50 * 1024 * 1024) {
+        toast.error('Files must be 50 MB or smaller');
+        e.target.value = '';
+        return;
+      }
+      setFormData(current => ({ ...current, [name]: files[0] }));
     }
+  };
+
+  const removeMedia = (name) => {
+    setFormData(current => ({ ...current, [name]: null }));
+    const input = name === 'image' ? imageInputRef.current : videoInputRef.current;
+    if (input) input.value = '';
   };
 
   const generateAiContent = async () => {
@@ -77,11 +91,7 @@ const CreatePostPage = () => {
   };
 
   const handleAiSuggestion = (suggestion) => {
-    setFormData({
-      ...formData,
-      content: suggestion,
-      creationType: 'AI Assisted'
-    });
+    setFormData(current => ({ ...current, content: suggestion, creationType: 'AI Assisted' }));
     setShowAiPanel(false);
   };
 
@@ -104,12 +114,18 @@ const CreatePostPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const content = formData.content.trim();
+    if (!content) {
+      toast.error('Write something before creating your post');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Create FormData for file upload
       const submitData = new FormData();
-      submitData.append('content', formData.content);
+      submitData.append('content', content);
       submitData.append('interest', formData.interest);
       submitData.append('audience', formData.audience);
       submitData.append('creationType', formData.creationType);
@@ -130,13 +146,13 @@ const CreatePostPage = () => {
         body: submitData
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
         toast.success('Post created successfully!');
-        navigate('/home');
+        navigate('/home', { state: { createdPost: data.data } });
       } else {
-        toast.error(data.message || data.error || 'Failed to create post');
+        throw new Error(data.message || data.error || 'Failed to create post');
       }
     } catch (error) {
       toast.error(error.message || 'An error occurred while creating post');
@@ -160,23 +176,22 @@ const CreatePostPage = () => {
         <div className="form-section">
           <div className="post-content">
             <textarea
+              className="composer-editor"
               name="content"
               value={formData.content}
               onChange={handleInputChange}
               placeholder="What's on your mind?"
               rows={6}
+              maxLength={2000}
               required
             />
             
             <div className="content-actions">
               <div className="formatting-tools">
-                <button type="button" className="tool-btn">
-                  <FileText size={20} />
-                </button>
-                <button type="button" className="tool-btn">
+                <button type="button" className="tool-btn" aria-label="Add photo" onClick={() => imageInputRef.current?.click()}>
                   <Image size={20} />
                 </button>
-                <button type="button" className="tool-btn">
+                <button type="button" className="tool-btn" aria-label="Add video" onClick={() => videoInputRef.current?.click()}>
                   <Video size={20} />
                 </button>
               </div>
@@ -189,14 +204,16 @@ const CreatePostPage = () => {
                 <Sparkles size={20} />
                 <span>AI Assist</span>
               </button>
+              <span className="character-count">{formData.content.length}/2000</span>
             </div>
           </div>
 
           {formData.image && (
             <div className="media-preview">
               <div className="image-preview">
-                <img src={URL.createObjectURL(formData.image)} alt="Preview" />
-                <button type="button" className="remove-btn">
+                <img src={mediaPreviews.image} alt="Selected attachment preview" />
+                <button type="button" className="remove-btn" onClick={() => removeMedia('image')}>
+                  <X size={16} />
                   Remove
                 </button>
               </div>
@@ -207,39 +224,19 @@ const CreatePostPage = () => {
             <div className="media-preview">
               <div className="video-preview">
                 <video controls>
-                  <source src={URL.createObjectURL(formData.video)} type="video/mp4" />
+                  <source src={mediaPreviews.video} type={formData.video.type || 'video/mp4'} />
                 </video>
-                <button type="button" className="remove-btn">
+                <button type="button" className="remove-btn" onClick={() => removeMedia('video')}>
+                  <X size={16} />
                   Remove
                 </button>
               </div>
             </div>
           )}
 
-          <div className="file-upload">
-            <label className="upload-label">
-              <Image size={20} />
-              <span>Add Photo</span>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-              />
-            </label>
-            
-            <label className="upload-label">
-              <Video size={20} />
-              <span>Add Video</span>
-              <input
-                type="file"
-                name="video"
-                accept="video/*"
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-              />
-            </label>
+          <div className="file-upload" aria-hidden="true">
+            <input ref={imageInputRef} type="file" name="image" accept="image/*" onChange={handleFileChange} tabIndex={-1} />
+            <input ref={videoInputRef} type="file" name="video" accept="video/*" onChange={handleFileChange} tabIndex={-1} />
           </div>
         </div>
 
@@ -247,8 +244,9 @@ const CreatePostPage = () => {
           <h3>Post Settings</h3>
           
           <div className="setting-group">
-            <label>Interest</label>
+            <label htmlFor="post-interest">Interest</label>
             <select
+              id="post-interest"
               name="interest"
               value={formData.interest}
               onChange={handleInputChange}
@@ -260,8 +258,9 @@ const CreatePostPage = () => {
           </div>
           
           <div className="setting-group">
-            <label>Audience</label>
+            <label htmlFor="post-audience">Audience</label>
             <select
+              id="post-audience"
               name="audience"
               value={formData.audience}
               onChange={handleInputChange}
@@ -273,8 +272,9 @@ const CreatePostPage = () => {
           </div>
           
           <div className="setting-group">
-            <label>Creation Type</label>
+            <label htmlFor="post-creation-type">Creation Type</label>
             <select
+              id="post-creation-type"
               name="creationType"
               value={formData.creationType}
               onChange={handleInputChange}

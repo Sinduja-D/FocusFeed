@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import '../styles/pages/LoginPage.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -44,7 +44,7 @@ const LoginPage = ({ admin = false }) => {
           toast.error('This account does not have administrator access');
           return;
         }
-        navigate(admin ? '/admin' : '/home');
+        navigate(admin ? '/admin' : (data.user.interests?.length ? '/home' : '/interests/setup'));
       } else {
         toast.error(data.message || 'Login failed');
       }

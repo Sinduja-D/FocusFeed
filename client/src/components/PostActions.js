@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/components/PostActions.css';
-import { Link } from 'react-router-dom';
 import { 
   Copy, 
   Share2, 
@@ -11,35 +10,28 @@ import {
 } from 'lucide-react';
 
 const PostActions = ({ post, onReport, onClose }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  
   const handleCopyLink = () => {
     navigator.clipboard.writeText(`http://localhost:3000/post/${post._id}`);
-    setShowMenu(false);
     onClose();
   };
 
   const handleShare = () => {
     // Implementation for sharing
-    setShowMenu(false);
     onClose();
   };
 
   const handleReport = () => {
     onReport();
-    setShowMenu(false);
     onClose();
   };
 
   const handleBlock = () => {
     // Implementation for blocking user
-    setShowMenu(false);
     onClose();
   };
 
   const handleDelete = () => {
     // Implementation for deleting post
-    setShowMenu(false);
     onClose();
   };
 

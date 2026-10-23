@@ -36,3 +36,19 @@ exports.admin = (req, res, next) => {
     return res.status(403).json({ success: false, message: 'Not authorized as an admin' });
   }
 };
+
+exports.optionalAuth = async (req, res, next) => {
+  const authorization = req.headers.authorization;
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(authorization.split(' ')[1], process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id);
+  } catch (err) {
+    req.user = null;
+  }
+
+  next();
+};

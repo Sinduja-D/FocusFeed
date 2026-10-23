@@ -198,7 +198,7 @@ const CommunityDetailPage = () => {
         <div className="posts-section">
           <div className="posts-header">
             <h2>Community Posts</h2>
-            <button className="btn btn-primary create-post-btn">
+            <button className="btn btn-primary create-post-btn" onClick={() => navigate('/create/post')}>
               <Plus size={20} />
               Create Post
             </button>
@@ -213,7 +213,7 @@ const CommunityDetailPage = () => {
               <div className="empty-state">
                 <h3>No posts yet</h3>
                 <p>Be the first to share something in this community</p>
-                <button className="btn btn-primary">
+                <button className="btn btn-primary" onClick={() => navigate('/create/post')}>
                   Create Post
                 </button>
               </div>

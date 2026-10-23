@@ -1,2 +1,10 @@
 /* Mobile bottom navigation styles */
-.mobile-bottom-nav { width: 100%; }
+.mobile-bottom-nav { display: none; }
+
+@media (max-width: 980px) {
+	.mobile-bottom-nav { position: fixed; z-index: 1000; right: 0; bottom: 0; left: 0; display: block; padding: 7px 8px max(7px, env(safe-area-inset-bottom)); border-top: 1px solid var(--border); background: rgba(255, 255, 255, .96); backdrop-filter: blur(14px); }
+	.mobile-nav-container { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 2px; max-width: 600px; margin: 0 auto; }
+	.mobile-nav-item { display: grid; justify-items: center; align-content: center; gap: 2px; min-width: 0; min-height: 48px; padding: 4px 1px; border-radius: 8px; color: var(--gray-color); font-size: 10px; line-height: 1.2; }
+	.mobile-nav-item span { overflow: hidden; max-width: 100%; text-overflow: ellipsis; white-space: nowrap; }
+	.mobile-nav-item.active, .mobile-nav-item:hover { background: #e7f3ee; color: var(--primary-color); text-decoration: none; }
+}

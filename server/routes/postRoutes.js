@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { getPosts, createPost, getPost, likePost, commentOnPost, sharePost, savePost, reportPost } = require('../controllers/postController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, optionalAuth } = require('../middleware/authMiddleware');
 const upload = require('../middleware/postUpload');
 
-router.get('/', getPosts);
+router.get('/', optionalAuth, getPosts);
 router.post('/', protect, upload.fields([
 	{ name: 'image', maxCount: 1 },
 	{ name: 'video', maxCount: 1 }

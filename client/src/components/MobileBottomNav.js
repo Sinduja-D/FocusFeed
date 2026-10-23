@@ -3,7 +3,7 @@ import '../styles/components/MobileBottomNav.css';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
-  Search, 
+  SlidersHorizontal,
   Users, 
   Plus, 
   Users2, 
@@ -16,7 +16,7 @@ const MobileBottomNav = () => {
   
   const navItems = [
     { icon: Home, label: 'Home', href: '/home' },
-    { icon: Search, label: 'Discover', href: '/discover' },
+    { icon: SlidersHorizontal, label: 'Interests', href: '/interests/setup' },
     { icon: Plus, label: 'Create', href: '/create' },
     { icon: Users2, label: 'Collaborations', href: '/collaborations' },
     { icon: Bell, label: 'Alerts', href: '/notifications' },

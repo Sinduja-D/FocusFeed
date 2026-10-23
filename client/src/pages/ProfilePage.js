@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/pages/ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { 
-  User, 
   Edit, 
   Calendar, 
   Users,
@@ -14,7 +13,6 @@ import {
   Settings,
   LogOut,
   Camera,
-  FileText,
   Heart,
   Eye,
   MessageSquare,
@@ -40,12 +38,7 @@ const ProfilePage = () => {
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchUserData();
-    fetchUserPosts();
-  }, []);
-
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch('/api/users/profile', {
@@ -64,12 +57,10 @@ const ProfilePage = () => {
         });
         
         // Calculate stats
-        setStats({
-          posts: Math.floor(Math.random() * 50) + 10,
-          communities: Math.floor(Math.random() * 10) + 2,
-          collaborations: Math.floor(Math.random() * 5) + 1,
+        setStats(current => ({
+          ...current,
           joined: new Date(data.data.createdAt).toLocaleDateString()
-        });
+        }));
       } else {
         toast.error('Failed to load user data');
       }
@@ -78,20 +69,34 @@ const ProfilePage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchUserPosts = async () => {
+  const fetchUserPosts = useCallback(async () => {
+    const userId = auth.user?.id || auth.user?._id;
+    if (!userId) return;
+
     try {
-      const response = await fetch('/api/posts?author=' + auth.user.id);
+      const response = await fetch(`/api/posts?author=${encodeURIComponent(userId)}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
       const data = await response.json();
 
       if (response.ok) {
-        setPosts(data.data);
+        const userPosts = Array.isArray(data.data) ? data.data : [];
+        setPosts(userPosts);
+        setStats(current => ({ ...current, posts: userPosts.length }));
       }
     } catch (error) {
       toast.error('Failed to load user posts');
     }
-  };
+  }, [auth.token, auth.user?._id, auth.user?.id]);
+
+  useEffect(() => {
+    fetchUserData();
+    fetchUserPosts();
+  }, [fetchUserData, fetchUserPosts]);
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -297,7 +302,7 @@ const ProfilePage = () => {
           <div className="profile-interests">
             <h3>Interests</h3>
             <div className="interests-list">
-              {user.interests.map((interest, index) => (
+              {(user.interests || []).map((interest, index) => (
                 <span key={index} className="interest-tag">{interest}</span>
               ))}
             </div>

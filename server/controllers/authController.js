@@ -62,7 +62,8 @@ exports.register = async (req, res, next) => {
         name: user.name,
         email: user.email,
         ageGroup: user.ageGroup,
-        role: user.role
+        role: user.role,
+        interests: user.interests
       }
     });
 

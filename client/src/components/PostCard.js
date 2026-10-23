@@ -29,6 +29,7 @@ const PostCard = ({ post, onPostUpdated }) => {
   const [showActions, setShowActions] = useState(false);
   const [showWhySeeingThis, setShowWhySeeingThis] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [showFullContent, setShowFullContent] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -133,6 +134,8 @@ const PostCard = ({ post, onPostUpdated }) => {
     }
   };
 
+  const isLongContent = currentPost.content.length > 260;
+
   return (
     <div className="post-card">
       <div className="post-header">
@@ -158,6 +161,9 @@ const PostCard = ({ post, onPostUpdated }) => {
         <div className="post-options">
           <button 
             className="more-options"
+            type="button"
+            aria-label="Post actions"
+            aria-expanded={showActions}
             onClick={() => setShowActions(!showActions)}
           >
             <MoreHorizontal size={20} />
@@ -174,9 +180,19 @@ const PostCard = ({ post, onPostUpdated }) => {
       </div>
       
       <div className="post-content">
-        <p className="post-text">{currentPost.content}</p>
+        <p className={`post-text${showFullContent ? ' expanded' : ''}`}>{currentPost.content}</p>
+        {isLongContent && (
+          <button
+            type="button"
+            className="post-content-toggle"
+            aria-expanded={showFullContent}
+            onClick={() => setShowFullContent(expanded => !expanded)}
+          >
+            {showFullContent ? 'Show less' : 'Read more'}
+          </button>
+        )}
         
-        {getMediaUrl(currentPost.image) && (
+        {getMediaUrl(currentPost.image) && !getMediaUrl(currentPost.video) && (
           <div className="post-image">
             <img src={getMediaUrl(currentPost.image)} alt="Post attachment" />
           </div>
@@ -184,7 +200,7 @@ const PostCard = ({ post, onPostUpdated }) => {
         
         {getMediaUrl(currentPost.video) && (
           <div className="post-video">
-            <video controls>
+            <video controls poster={getMediaUrl(currentPost.image) || undefined}>
               <source src={getMediaUrl(currentPost.video)} type="video/mp4" />
               Your browser does not support the video tag.
             </video>

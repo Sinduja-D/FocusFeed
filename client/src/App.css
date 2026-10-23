@@ -1,19 +1,17 @@
 /* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 :root {
-  --primary-blue: #2563EB;
-  --dark-blue: #1D4ED8;
-  --secondary-teal: #0F766E;
-  --accent-teal: #14B8A6;
-  --background: #F8FAFC;
+  --primary-blue: #14786e;
+  --dark-blue: #0d5f58;
+  --secondary-teal: #395f5b;
+  --accent-teal: #83cbbb;
+  --background: #f2f7f4;
   --card: #FFFFFF;
-  --main-text: #0F172A;
-  --secondary-text: #64748B;
-  --border: #E2E8F0;
-  --success: #16A34A;
-  --warning: #F59E0B;
-  --danger: #DC2626;
+  --main-text: #183532;
+  --secondary-text: #637673;
+  --border: #dce8e3;
+  --success: #178f64;
+  --warning: #b77b1e;
+  --danger: #c65353;
 }
 
 * {
@@ -23,7 +21,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background-color: var(--background);
   color: var(--main-text);
   line-height: 1.6;
@@ -313,6 +311,8 @@ body {
   .community-item .btn { width: 100%; }
   .profile-actions .btn { width: 100%; justify-content: center; }
 }
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', 'DM Sans', sans-serif; }
 
 /* Remaining current page structures */
 .create-page, .collaborations-page, .notifications-page, .privacy-settings-page, .safety-center-page, .community-detail-page { width: 100%; min-height: auto; padding: 0; background: transparent; }

@@ -1,9 +1,9 @@
 /* Sidebar styles */
-.sidebar { width: 220px; flex: 0 0 220px; min-width: 0; }
-.sidebar-content { position: sticky; top: 92px; padding: 8px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; }
+.sidebar { width: 220px; min-width: 0; }
+.sidebar-content { position: sticky; top: 82px; padding: 8px; background: rgba(255, 255, 255, .86); border: 1px solid var(--border); border-radius: 10px; }
 .sidebar-section + .sidebar-section { margin-top: 22px; }
 .sidebar-title { padding: 0 10px; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
 .sidebar-nav { display: grid; gap: 3px; }
 .sidebar-link { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; color: #475569; font-size: 14px; }
-.sidebar-link:hover, .sidebar-link.active { background: #eaf2ff; color: #1d4ed8; text-decoration: none; }
+.sidebar-link:hover, .sidebar-link.active { background: #e7f3ee; color: var(--primary-blue); text-decoration: none; }
 @media (max-width: 768px) { .sidebar { display: none; } }

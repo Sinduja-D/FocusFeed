@@ -17,18 +17,10 @@ const ensureDemoMedia = async () => {
     await imagePost.save();
   }
 
-  const videoPost = await Post.findOne({ interest: 'Sports' });
-  if (videoPost && !videoPost.video) {
-    videoPost.video = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-    await videoPost.save();
-  }
 };
 
 const createDemoUsers = async () => {
-  const existingAdmin = await User.findOne({ email: 'admin@focusfeed.com' });
-  if (existingAdmin) return { admin: existingAdmin };
-
-  const admin = await User.create({
+  const admin = await User.findOne({ email: 'admin@focusfeed.com' }) || await User.create({
     name: 'Admin User',
     email: 'admin@focusfeed.com',
     password: 'Admin@123',
@@ -38,7 +30,7 @@ const createDemoUsers = async () => {
     bio: 'Administrator of FocusFeed'
   });
 
-  const user1 = await User.create({
+  const user1 = await User.findOne({ email: 'john@focusfeed.com' }) || await User.create({
     name: 'John Doe',
     email: 'john@focusfeed.com',
     password: 'John@123',
@@ -47,7 +39,7 @@ const createDemoUsers = async () => {
     bio: 'Tech enthusiast and educator'
   });
 
-  const user2 = await User.create({
+  const user2 = await User.findOne({ email: 'jane@focusfeed.com' }) || await User.create({
     name: 'Jane Smith',
     email: 'jane@focusfeed.com',
     password: 'Jane@123',
@@ -56,7 +48,7 @@ const createDemoUsers = async () => {
     bio: 'Digital artist and content creator'
   });
 
-  const user3 = await User.create({
+  const user3 = await User.findOne({ email: 'alex@focusfeed.com' }) || await User.create({
     name: 'Alex Johnson',
     email: 'alex@focusfeed.com',
     password: 'Alex@123',
@@ -65,7 +57,82 @@ const createDemoUsers = async () => {
     bio: 'Sports coach and community organizer'
   });
 
+  const demoProfiles = [
+    [admin, 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&h=240&q=80'],
+    [user1, 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=240&h=240&q=80'],
+    [user2, 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&h=240&q=80'],
+    [user3, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&h=240&q=80']
+  ];
+
+  for (const [user, profileImage] of demoProfiles) {
+    if (!user.profileImage || user.profileImage === 'default.jpg') {
+      user.profileImage = profileImage;
+      await user.save();
+    }
+  }
+
   return { admin, users: [user1, user2, user3] };
+};
+
+const ensureDemoPosts = async () => {
+  const { users } = await createDemoUsers();
+  const posts = [
+    ['Technology', 'A small accessibility feature can make a product easier for thousands of people to use. What is one feature you wish more apps included?'],
+    ['Science', 'A neighborhood bird-count project is helping researchers track migration changes. Have you noticed new species near you this year?'],
+    ['Education', 'I started using short review sessions after class instead of one long study night. It has made revision feel much more manageable.'],
+    ['Sports', 'Our weekend running group is setting a relaxed pace for first-time runners. Everyone is welcome, whatever your distance.'],
+    ['Art', 'A quick color study from this morning: trying to capture the way sunlight changes a familiar room.'],
+    ['Entertainment', 'The best stories leave you thinking about the characters long after the final scene. What have you watched recently that stayed with you?'],
+    ['Personal Stories', 'I finally asked for help with a project I had been stuck on. A ten-minute conversation saved me hours of guessing.'],
+    ['Social Causes', 'Our campus repair table kept several laptops and headphones out of the waste stream this week. Small fixes add up.'],
+    ['Technology', 'Testing a simple reading mode with larger type and fewer distractions. The difference on a long article is surprisingly good.'],
+    ['Education', 'Study tip that worked for me: explain the idea out loud before looking at your notes. The gaps become obvious very quickly.'],
+    ['Science', 'A local community garden is recording soil temperature and rainfall to understand which plants handle the changing seasons best.'],
+    ['Art', 'Made a poster from hand-drawn shapes and two ink colors. Limiting the palette forced me to simplify the composition.'],
+    ['Technology', 'A closer look at the tiny components that turn a circuit board into a useful tool.', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85'],
+    ['Technology', 'A small robotics team testing a new prototype together in the workshop.', 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85'],
+    ['Technology', 'Ideas move faster when a team can sketch, build, and test them side by side.', 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=85'],
+    ['Science', 'A close-up from a plant-growth observation: the smallest changes are often the most interesting.', 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=85', 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'],
+    ['Science', 'A clear night sky makes a wonderful reminder of how much there is left to explore.', 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1200&q=85'],
+    ['Science', 'A bright lab bench and a fresh set of questions for today’s experiment.', 'https://images.unsplash.com/photo-1530210124550-912dc1381cb8?auto=format&fit=crop&w=1200&q=85'],
+    ['Art', 'Trying a loose brush study with warm light and broad color shapes.', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=85'],
+    ['Art', 'A gallery wall full of different materials, marks, and ways of seeing.', 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=85'],
+    ['Art', 'A short botanical motion study paired with a painted study of color and form.', 'https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=85', 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'],
+    ['Sports', 'An early training session before the courts get busy.', 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=85'],
+    ['Sports', 'A team huddle before the first whistle. Good energy all around.', 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1200&q=85'],
+    ['Sports', 'A quiet moment between plays during a weekend game.', 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=85']
+  ];
+
+  for (const [index, [interest, content, image, video]] of posts.entries()) {
+    if (await Post.exists({ content })) continue;
+    await Post.create({
+      author: users[index % users.length],
+      content,
+      interest,
+      image: image || '',
+      video: video || '',
+      audience: 'Public',
+      creationType: 'Human Created',
+      aiLabel: 'Human Created',
+      moderationStatus: 'SAFE',
+      factStatus: 'Not Reviewed'
+    });
+  }
+};
+
+const ensureDemoNotifications = async () => {
+  const { users } = await createDemoUsers();
+  const examples = [
+    [users[0], 'Report Decision', 'A report on your post has been reviewed'],
+    [users[1], 'Collaboration Invitation', 'You have a new collaboration invitation'],
+    [users[2], 'Contribution Approved', 'Your contribution has been approved']
+  ];
+
+  for (const [user, type, message] of examples) {
+    if (!await Notification.exists({ user, message })) {
+      await Notification.create({ user, type, message, read: false });
+    }
+  }
 };
 
 const createDemoContent = async () => {
@@ -270,6 +337,8 @@ const seedData = async () => {
     const postCount = await Post.countDocuments();
 
     if (adminExists && postCount > 0) {
+      await ensureDemoPosts();
+      await ensureDemoNotifications();
       await ensureDemoMedia();
       console.log('Required demo data already exists: admin + posts.');
       return;
@@ -277,6 +346,8 @@ const seedData = async () => {
 
     console.log('Creating missing default demo data...');
     await createDemoContent();
+    await ensureDemoPosts();
+    await ensureDemoNotifications();
     await ensureDemoMedia();
     console.log('Seed data created successfully.');
   } catch (error) {
@@ -300,13 +371,12 @@ const seedIfEmpty = async () => {
     if (!adminExists || postCount === 0) {
       console.log('Missing focusfeed admin or posts. Running demo seeding...');
       await createDemoContent();
-      await ensureDemoMedia();
-      console.log('Seed data created successfully.');
-      return;
     }
 
+    await ensureDemoPosts();
+    await ensureDemoNotifications();
     await ensureDemoMedia();
-    console.log('Demo data already exists in MongoDB.');
+    console.log('Demo data is ready.');
   } catch (error) {
     console.error('seedIfEmpty error:', error.message);
     throw error;

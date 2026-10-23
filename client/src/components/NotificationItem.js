@@ -72,8 +72,8 @@ const NotificationItem = ({ notification }) => {
           </span>
           
           {notification.relatedPost && (
-            <Link to={`/post/${notification.relatedPost}`} className="notification-link">
-              View Post
+            <Link to="/home" className="notification-link">
+              View Feed
             </Link>
           )}
           

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/pages/NotificationsPage.css';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import NotificationItem from '../components/NotificationItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { 
   Bell, 
   CheckCircle, 
-  Settings,
   Filter,
   Trash2,
   RefreshCw
@@ -18,8 +16,6 @@ const NotificationsPage = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [unreadCount, setUnreadCount] = useState(0);
-  const navigate = useNavigate();
-
   useEffect(() => {
     fetchNotifications();
   }, []);
@@ -35,10 +31,11 @@ const NotificationsPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setNotifications(data.data);
+        const loadedNotifications = Array.isArray(data.data) ? data.data : [];
+        setNotifications(loadedNotifications);
         
         // Count unread notifications
-        const unread = data.data.filter(n => !n.read).length;
+        const unread = loadedNotifications.filter(n => !n.read).length;
         setUnreadCount(unread);
       } else {
         toast.error('Failed to load notifications');
@@ -65,7 +62,7 @@ const NotificationsPage = () => {
             n._id === notificationId ? { ...n, read: true } : n
           )
         );
-        setUnreadCount(prev => prev - 1);
+        setUnreadCount(prev => Math.max(0, prev - 1));
       }
     } catch (error) {
       toast.error('Failed to mark notification as read');
@@ -118,6 +115,16 @@ const NotificationsPage = () => {
     }
     if (filter === 'read') {
       return notification.read;
+    }
+    const type = notification.type.toLowerCase();
+    if (filter === 'reports') {
+      return type.includes('report');
+    }
+    if (filter === 'appeals') {
+      return type.includes('appeal');
+    }
+    if (filter === 'collaborations') {
+      return type.includes('collaboration') || type.includes('contribution');
     }
     return true;
   });

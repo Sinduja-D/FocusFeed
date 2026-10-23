@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import '../styles/pages/InterestSetupPage.css';
 import { useNavigate } from 'react-router-dom';
 import { usePreferences } from '../context/PreferenceContext';
+import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
 import { 
   Computer, 
@@ -17,9 +18,12 @@ import {
 } from 'lucide-react';
 
 const InterestSetupPage = () => {
-  const [selectedInterests, setSelectedInterests] = useState([]);
+  const { auth, updateUser } = useAuth();
+  const { preferences, updatePreferences } = usePreferences();
+  const [selectedInterests, setSelectedInterests] = useState(() => (
+    preferences.interests.length ? preferences.interests : auth.user?.interests || []
+  ));
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { updatePreferences } = usePreferences();
   const navigate = useNavigate();
 
   const interests = [
@@ -34,11 +38,9 @@ const InterestSetupPage = () => {
   ];
 
   const toggleInterest = (interestId) => {
-    if (selectedInterests.includes(interestId)) {
-      setSelectedInterests(selectedInterests.filter(id => id !== interestId));
-    } else {
-      setSelectedInterests([...selectedInterests, interestId]);
-    }
+    setSelectedInterests(current => current.includes(interestId)
+      ? current.filter(id => id !== interestId)
+      : [...current, interestId]);
   };
 
   const handleSubmit = async () => {
@@ -51,10 +53,7 @@ const InterestSetupPage = () => {
 
     try {
       // Update user preferences
-      updatePreferences({ interests: selectedInterests });
-      
-      // In a real app, this would save to the backend
-      await fetch('/api/users/interests', {
+      const response = await fetch('/api/users/interests', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -62,11 +61,16 @@ const InterestSetupPage = () => {
         },
         body: JSON.stringify({ interests: selectedInterests })
       });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to save interests');
+
+      updatePreferences({ interests: selectedInterests, focusMode: selectedInterests[0] });
+      updateUser({ interests: selectedInterests });
 
       toast.success('Interests saved successfully!');
       navigate('/home');
     } catch (error) {
-      toast.error('Failed to save interests. Please try again.');
+      toast.error(error.message || 'Failed to save interests. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -90,6 +94,8 @@ const InterestSetupPage = () => {
                 <button
                   key={interest.id}
                   className={`interest-card ${isSelected ? 'selected' : ''}`}
+                  type="button"
+                  aria-pressed={isSelected}
                   onClick={() => toggleInterest(interest.id)}
                 >
                   <Icon size={32} />
